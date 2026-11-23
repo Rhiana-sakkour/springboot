@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package user;
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc.user";
+option java_outer_classname = "UserProto";
+
+// Internal contract between order-service (client) and user-service (server).
+// This file must be IDENTICAL in both projects.
+service UserService {
+  // Returns the user, or fails with Status NOT_FOUND when the user does not exist.
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+}
+
+message GetUserRequest {
+  int64 user_id = 1;
+}
+
+message GetUserResponse {
+  int64 user_id = 1;
+  string name = 2;
+  string email = 3;
+}
